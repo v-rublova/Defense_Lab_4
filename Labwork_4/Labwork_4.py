@@ -17,7 +17,7 @@ class elg_:
 M - hash;
 sig - signature [c_1,c_2]
     	'''
-        #whereas M=(c_2/(c_1^x)) mod p put a tremendous strain on my CPU a
+        #due to M=(c_2/(c_1^x)) mod p putting a tremendous strain on my CPU a
     	#roundabound way was found
         #starting from here
         r = randprime(2, self.p - 1)
@@ -58,12 +58,11 @@ while t:
     message = input("Your message:")
     if message: t = false
 hash = hashlib.sha512(message.encode("utf8")).digest()
+print("hash:",int.from_bytes(hash,"big"),sep="\n")
 if (len(str(int.from_bytes(hash,"big"))) > size):
     print("Message can't be signed with current 'size' value.")
 else:
-    key = keys(pow(10,size - 1),pow(10,size))
-
-    print("hash:",int.from_bytes(hash,"big"),sep="\n")
+    key = keys(pow(10,size - 1),pow(10,size)) 
     while 1:
         k = randprime(pow(10,size - 1),key.p - 1)
         if gcd(k,key.p - 1) == 1: break
